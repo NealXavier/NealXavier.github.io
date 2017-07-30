@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content=",,," />
+  <meta name="keywords" content="Algorithm," />
 
 
 
@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="This is my tags">
-<meta name="keywords" content="Android,Download,Java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="All tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="问题描述 You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the 1’s digit is at the head of the list. Write a fun">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lintcode学习笔记之Add Two Numbers">
+<meta property="og:url" content="http://yoursite.com/2017/07/29/AddTwoNumbers/index.html">
 <meta property="og:site_name" content="NealXavier">
-<meta property="og:description" content="This is my tags">
-<meta property="og:updated_time" content="2017-07-09T09:26:34.967Z">
+<meta property="og:description" content="问题描述 You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the 1’s digit is at the head of the list. Write a fun">
+<meta property="og:updated_time" content="2017-07-30T02:16:55.048Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="All tags">
-<meta name="twitter:description" content="This is my tags">
+<meta name="twitter:title" content="Lintcode学习笔记之Add Two Numbers">
+<meta name="twitter:description" content="问题描述 You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the 1’s digit is at the head of the list. Write a fun">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/29/AddTwoNumbers/"/>
 
 
 
 
 
-  <title>All tags | NealXavier</title>
+  <title>Lintcode学习笔记之Add Two Numbers | NealXavier</title>
   
 
 
@@ -267,29 +267,201 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">All tags</h1>
+  
 
+  
+  
+  
 
-	<div class="post-meta">
-		<div class="post-description">This is my tags</div>
-	</div>
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/29/AddTwoNumbers/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neal Xavier">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.png">
+    </span>
 
-</header>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NealXavier">
+    </span>
 
     
-    
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 1 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lintcode学习笔记之Add Two Numbers</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-29T22:16:50+08:00">
+                2017-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/Algorithm/" style="font-size: 12px; color: #ccc">Algorithm</a>
-        </div>
-      </div>
+      </header>
     
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><blockquote>
+<p>You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the 1’s digit is at the head of the list. Write a function that adds the two numbers and returns the sum as a linked list.</p>
+</blockquote>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><blockquote>
+<p>Given 7-&gt;1-&gt;6 + 5-&gt;9-&gt;2. That is, 617 + 295.</p>
+<p>Return 2-&gt;1-&gt;9. That is 912.</p>
+<p>Given 3-&gt;1-&gt;5 and 5-&gt;9-&gt;2, return 8-&gt;0-&gt;8.</p>
+</blockquote>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><pre><code>1.如果两个数的位数不同怎么办？
+答：设置两个分支，分别是两个数在特定的位上都有数和特定的位置只有其中一个数（那个更长的）的情况。
+2.怎么处理位数溢出的要求？
+答：给定一个变量carry记录变化，把它放在链表的最后一位。
+3.怎样设置链表能显示计算结果是倒置的效果 ？
+答：按照链表的顺序相加即可。
+</code></pre><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode(int x) {
+ * val = x;
+ * next = null;  
+ * }
+ * }
+ */
+
+public class Solution {
+
+/**
+ * @param l1: the first list
+ * @param l2: the second list
+ * @return: the sum list of l1 and l2 
+ */
+public ListNode addLists(ListNode l1, ListNode l2) {
+// write your code here
+if(l1==null&amp;&amp;l2==null){ //判断链表是否为空
+return null;
+}
+
+ListNode head=new ListNode(0);//设置一个空的链表头，这是一个套路，删除链表的时候也会用到，用以避免处理表头是否需要删除的问题。
+ListNode point=head;  //用point作为具体操作的结点
+int carry=0;          //定义进位数字标志位
+while(l1!=null&amp;&amp;l2!=null){
+int sum=l1.val+l2.val+carry;
+point.next=new ListNode(sum%10);  //保留个位
+carry=sum/10;                     //保留个位之外的数字
+l1=l1.next;
+l2=l2.next;
+point=point.next;
+}
+
+while(l1!=null){                 //如果l1是那个更长的链表则用l1进行相加
+int sum=l1.val+carry;
+point.next=new ListNode(sum%10);
+carry=sum/10;
+l1=l1.next;
+point=point.next; 
+}
+while(l2!=null){                //如果l2是那个更长的链表则用l1进行相加
+int sum=l2.val+carry;
+point.next=new ListNode(sum%10);
+carry=sum/10;
+l2=l2.next;
+point=point.next; 
+}
+
+if(carry!=0){                  //进位数标志位不为0时说明要再设置一位，数值就为carry的值
+point.next=new ListNode(carry);
+}
+return head.next;
+}
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -321,8 +493,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/images/avatar.png"
@@ -375,6 +556,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">4.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -488,10 +685,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
