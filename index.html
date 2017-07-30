@@ -276,6 +276,189 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/29/AddTwoNumbers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neal Xavier">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NealXavier">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/29/AddTwoNumbers/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-29T22:16:50+08:00">
+                2017-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>  title:lintcode学习笔记之Add Two Numbers</p>
+<h2 id="tags-algorithm"><a href="#tags-algorithm" class="headerlink" title="  tags:algorithm"></a>  tags:algorithm</h2><p>###问题描述</p>
+<blockquote>
+<p>You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the 1’s digit is at the head of the list. Write a function that adds the two numbers and returns the sum as a linked list.</p>
+</blockquote>
+<p>###例子</p>
+<blockquote>
+<p>Given 7-&gt;1-&gt;6 + 5-&gt;9-&gt;2. That is, 617 + 295.</p>
+<p>Return 2-&gt;1-&gt;9. That is 912.</p>
+<p>Given 3-&gt;1-&gt;5 and 5-&gt;9-&gt;2, return 8-&gt;0-&gt;8.</p>
+</blockquote>
+<h3 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h3><p>####<br>      1.如果两个数的位数不同怎么办？<br>      答：设置两个分支，分别是两个数在特定的位上都有数和特定的位置只有其中一个数（那个更长的）的情况。<br>      2.怎么处理位数溢出的要求？<br>      答：给定一个变量carry记录变化，把它放在链表的最后一位。<br>      3.怎样设置链表能显示计算结果是倒置的效果 ？<br>      答：按照链表的顺序相加即可。</p>
+<p>####</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode(int x) {
+ * val = x;
+ * next = null;  
+ * }
+ * }
+ */
+
+public class Solution {
+
+/**
+ * @param l1: the first list
+ * @param l2: the second list
+ * @return: the sum list of l1 and l2 
+ */
+public ListNode addLists(ListNode l1, ListNode l2) {
+// write your code here
+if(l1==null&amp;&amp;l2==null){ //判断链表是否为空
+return null;
+}
+
+ListNode head=new ListNode(0);//设置一个空的链表头，这是一个套路，删除链表的时候也会用到，用以避免处理表头是否需要删除的问题。
+ListNode point=head;  //用point作为具体操作的结点
+int carry=0;          //定义进位数字标志位
+while(l1!=null&amp;&amp;l2!=null){
+int sum=l1.val+l2.val+carry;
+point.next=new ListNode(sum%10);  //保留个位
+carry=sum/10;                     //保留个位之外的数字
+l1=l1.next;
+l2=l2.next;
+point=point.next;
+}
+
+while(l1!=null){                 //如果l1是那个更长的链表则用l1进行相加
+int sum=l1.val+carry;
+point.next=new ListNode(sum%10);
+carry=sum/10;
+l1=l1.next;
+point=point.next; 
+}
+while(l2!=null){                //如果l2是那个更长的链表则用l1进行相加
+int sum=l2.val+carry;
+point.next=new ListNode(sum%10);
+carry=sum/10;
+l2=l2.next;
+point=point.next; 
+}
+
+if(carry!=0){                  //进位数标志位不为0时说明要再设置一位，数值就为carry的值
+point.next=new ListNode(carry);
+}
+return head.next;
+}
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -432,7 +615,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
