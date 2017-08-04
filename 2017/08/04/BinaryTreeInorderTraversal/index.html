@@ -93,19 +93,20 @@
 
 
 
-<meta name="description" content="问题描述 Given a binary tree, determine if it is height-balanced.For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never diff">
+<meta name="description" content="问题描述 Given a binary tree, return the inorder traversal of its nodes’ values.  例子 Given binary tree {1,#,2,3},return [1,3,2].   思考 非递归方法和先序遍历相差无几，还是需要找到叶子结点的最左端。 还是可以用分治法来解决  代码实现/**  * Definition of T">
 <meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lintcode学习笔记之Balanced Binary Tree">
-<meta property="og:url" content="http://yoursite.com/2017/07/31/BalancedBinaryTree/index.html">
+<meta property="og:title" content="Lintcode学习笔记之二叉树中序遍历">
+<meta property="og:url" content="http://yoursite.com/2017/08/04/BinaryTreeInorderTraversal/index.html">
 <meta property="og:site_name" content="Xavier&#39;s">
-<meta property="og:description" content="问题描述 Given a binary tree, determine if it is height-balanced.For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never diff">
-<meta property="og:image" content="http://yoursite.com/img/BalancedBinaryTree.jpg">
-<meta property="og:updated_time" content="2017-07-31T07:33:07.278Z">
+<meta property="og:description" content="问题描述 Given a binary tree, return the inorder traversal of its nodes’ values.  例子 Given binary tree {1,#,2,3},return [1,3,2].   思考 非递归方法和先序遍历相差无几，还是需要找到叶子结点的最左端。 还是可以用分治法来解决  代码实现/**  * Definition of T">
+<meta property="og:image" content="http://yoursite.com/img/BinaryTreeInorderTraversal.jpg">
+<meta property="og:image" content="http://yoursite.com/img/Inorder.jpg">
+<meta property="og:updated_time" content="2017-08-04T13:35:30.704Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lintcode学习笔记之Balanced Binary Tree">
-<meta name="twitter:description" content="问题描述 Given a binary tree, determine if it is height-balanced.For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never diff">
-<meta name="twitter:image" content="http://yoursite.com/img/BalancedBinaryTree.jpg">
+<meta name="twitter:title" content="Lintcode学习笔记之二叉树中序遍历">
+<meta name="twitter:description" content="问题描述 Given a binary tree, return the inorder traversal of its nodes’ values.  例子 Given binary tree {1,#,2,3},return [1,3,2].   思考 非递归方法和先序遍历相差无几，还是需要找到叶子结点的最左端。 还是可以用分治法来解决  代码实现/**  * Definition of T">
+<meta name="twitter:image" content="http://yoursite.com/img/BinaryTreeInorderTraversal.jpg">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/31/BalancedBinaryTree/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/04/BinaryTreeInorderTraversal/"/>
 
 
 
 
 
-  <title>Lintcode学习笔记之Balanced Binary Tree | Xavier's</title>
+  <title>Lintcode学习笔记之二叉树中序遍历 | Xavier's</title>
   
 
 
@@ -268,7 +269,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/31/BalancedBinaryTree/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/BinaryTreeInorderTraversal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Neal Xavier">
@@ -285,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Lintcode学习笔记之Balanced Binary Tree</h1>
+          <h1 class="post-title" itemprop="name headline">Lintcode学习笔记之二叉树中序遍历</h1>
         
 
         <div class="post-meta">
@@ -297,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-31T14:29:29+08:00">
-                2017-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T17:44:03+08:00">
+                2017-08-04
               </time>
             
 
@@ -355,18 +356,16 @@
 
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><blockquote>
-<p>Given a binary tree, determine if it is height-balanced.<br>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.</p>
+<p>Given a binary tree, return the inorder traversal of its nodes’ values.</p>
 </blockquote>
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><blockquote>
-<p>Given binary tree A = {3,9,20,#,#,15,7}, B = {3,#,20,15,7}</p>
+<p>Given binary tree {1,#,2,3},<br><img src="/img/BinaryTreeInorderTraversal.jpg" alt="photo"><br>return [1,3,2]. </p>
 </blockquote>
-<p><img src="/img/BalancedBinaryTree.jpg" alt="photo"></p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><pre><code>分支条件
-1.空节点的二叉树
-2.在根节点的下的左右子树的深度相差已经&gt;1
-3.在2条件不成立，继续遍历分别以左右子树作为根节点的情况
-</code></pre><h3 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h3><pre><code>/**
- * //定义一棵树 
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ol>
+<li>非递归方法和先序遍历相差无几，还是需要找到叶子结点的最左端。</li>
+<li>还是可以用分治法来解决</li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>/**
  * Definition of TreeNode:
  * public class TreeNode {
  * public int val;
@@ -377,36 +376,57 @@
  * }
  * }
  */
-
-public class Solution {
-/**
- * @param root: The root of binary tree.
- * @return: True if this Binary tree is Balanced, or false.
- */
- // TotalTime :1947ms
-public boolean isBalanced(TreeNode root) {
+// version1 : 递归 
+public class Solution{
+ArrayList&lt;Integer&gt; inorder=new ArrayList&lt;Integer&gt;();
+public ArrayList&lt;Integer&gt; inorderTraversal(TreeNode root) {
 // write your code here
-if(root==null) {return true;} // 根节点为空的情况返回 true
-int left=depth(root.left);    // 通过depth(TreeNode)方法得到左子树的深度
-int right=depth(root.right);  // 同理
-if(left-right&gt;1||left-right&lt;-1){ //两颗子树的深度相差超过1
-return false;
-}else{
-return isBalanced(root.left)&amp;&amp;isBalanced(root.right); // 继续与左右子树作为根节点进行遍历
+if(root==null){ return inorder;}
+
+inorderTraversal(root.left);
+inorder.add(root.val);
+inorderTraversal(root.right);
+return inorder;
+ }
+}
+</code></pre><p>   左孩子结点为空时的情况如下：<br>   <img src="/img/Inorder.jpg" alt="inorder"></p>
+<pre><code>//version2 :  非递归（迭代）
+public class Solution{
+  public ArrayList&lt;Integer&gt; inorderTraversal(TreeNode root){
+    ArrayList&lt;Integer&gt; inorder=new ArrayList&lt;Integer&gt;();
+    Stack&lt;TreeNode&gt; stack=new Stack&lt;TreeNode&gt;();
+    TreeNode curt=root;
+    if(root==null){ return inorder;}
+    while(!stack.empty()||curt!=null){
+         while(curt!=null){
+            stack.push(stack);   //一边遍历的同时用栈记录左孩子结点
+            curt=curt.left;
+         }                       
+                                  // 左孩子为空的情况，
+           curt=stack.pop();      // 弹出该空的左孩子的父结点
+           inorder.add(curt.val); // 用集合保存结点的值 
+           curt=curt.right;       // 遍历右子树
+     }
+     return inorder;          
+  }
 }
 
-}
-private int depth(TreeNode node){
-if(node==null){
-return 0;
-}else if(node.left==null&amp;&amp;node.right==null){
-return 1;
-}else{
-int left=depth(node.left);
-int right=depth(node.right);
-return 1+(left&gt;right?left:right);
-}
-}
+//version3 :  分治法(Divide &amp; Conquer)
+public class Solution{
+
+ public ArrayList&lt;Integer&gt; inorderTraversal(TreeNode root){
+     ArrayList&lt;Integer&gt; inorder=new ArrayList&lt;Integer&gt;(); //inorder的值要放在方法体里面
+     if(root==null){ return inorder;}
+     //Divide 
+     ArrayList&lt;Integer&gt; left=inorderTraversal(root.left);
+     ArrayList&lt;Integer&gt; right=inorderTraversal(root.right);
+
+     //Conquer
+     inorder.addAll(left);
+     inorder.add(root.val);
+     inorder.addAll(right);
+     return inorder; 
+ }
 }
 </code></pre>
       
@@ -450,8 +470,8 @@ return 1+(left&gt;right?left:right);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/29/AddTwoNumbers/" rel="next" title="Lintcode学习笔记之Add Two Numbers">
-                <i class="fa fa-chevron-left"></i> Lintcode学习笔记之Add Two Numbers
+              <a href="/2017/08/03/BinaryTreePreorderTraversal/" rel="next" title="Lintcode学习笔记之二叉树先序遍历">
+                <i class="fa fa-chevron-left"></i> Lintcode学习笔记之二叉树先序遍历
               </a>
             
           </div>
@@ -459,10 +479,6 @@ return 1+(left&gt;right?left:right);
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/03/BinaryTreePreorderTraversal/" rel="prev" title="Lintcode学习笔记之二叉树先序遍历">
-                Lintcode学习笔记之二叉树先序遍历 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -591,7 +607,7 @@ return 1+(left&gt;right?left:right);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码展示"><span class="nav-number">4.</span> <span class="nav-text">代码展示</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">4.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
             
 
           </div>
