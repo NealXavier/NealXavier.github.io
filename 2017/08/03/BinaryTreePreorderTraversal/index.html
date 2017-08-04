@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="Xavier&#39;s">
 <meta property="og:description" content="题目描述 Given a binary tree, return the preorder traversal of its nodes’ values.  例子 return [1,2,4,5,3].   思考1. 二叉树的遍历是可以用递归和非递归的方法进行解答的。 2. 先序遍历的遍历顺序是根节点，左孩子节点，右孩子结点。 代码实现/*  * Definition of TreeNode:">
 <meta property="og:image" content="http://yoursite.com/img/BinaryTreePreorderTraversal.jpg">
-<meta property="og:updated_time" content="2017-08-04T09:16:21.579Z">
+<meta property="og:updated_time" content="2017-08-04T09:46:30.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lintcode学习笔记之二叉树先序遍历">
 <meta name="twitter:description" content="题目描述 Given a binary tree, return the preorder traversal of its nodes’ values.  例子 return [1,2,4,5,3].   思考1. 二叉树的遍历是可以用递归和非递归的方法进行解答的。 2. 先序遍历的遍历顺序是根节点，左孩子节点，右孩子结点。 代码实现/*  * Definition of TreeNode:">
@@ -380,11 +380,11 @@ public class Solution{
    //result的定义一定要在方法体之外，
    ArayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();
    public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
- if(root==null){return result;} //常规套路验证是否根节点为空
- result.add(root.val); //集合保存根节点的值
- preorderTraversal(root.left); //遍历左子树
- preorderTraversal(root.right);//遍历右子树
- return result;
+   if(root==null){return result;} //常规套路验证是否根节点为空
+   result.add(root.val); //集合保存根节点的值
+   preorderTraversal(root.left); //遍历左子树
+   preorderTraversal(root.right);//遍历右子树
+   return result;
   }
 }
 
@@ -408,8 +408,8 @@ public class Solution{
    curt=stack.pop();  //弹出该无左孩子的根结点
    curt=curt.right;   //找到右孩子继续遍历 
  }
-      return result;
-   }
+  return result;
+ }
 }  
 
 // 非递归方法(version 2) 该方法着眼于每颗由根节点、左孩子、右孩子构成的小树。
@@ -420,12 +420,16 @@ public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
  Stack&lt;TreeNode&gt; stack=new Stack&lt;TreeNode&gt;();
  stack.push(root);
  while(!stack.empty()){
-       TreeNode node=stack.pop();
-       result.add(node.val);
-       if(node.right!=null){stack.push(node.right);} //栈的特点是先进后出 先保留右孩子结点再保留左孩子结点
-       if(node.left!=null){stack.push(node.left);}
-    }
-    reutrn result;  
+   TreeNode node=stack.pop();
+   result.add(node.val);
+   if(node.right!=null){
+   stack.push(node.right);
+   } //栈的特点是先进后出 先保留右孩子结点再保留左孩子结点
+   if(node.left!=null){
+   stack.push(node.left);
+   }
+}
+reutrn result;  
   }
 }
 
@@ -446,8 +450,8 @@ public class Solution{
 
   return result;
  } 
-</code></pre><p>   }</p>
-
+}
+</code></pre>
       
     </div>
 
