@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="Xavier&#39;s">
 <meta property="og:description" content="题目描述 Given a binary tree, return the preorder traversal of its nodes’ values.  例子 return [1,2,4,5,3].   思考1. 二叉树的遍历是可以用递归和非递归的方法进行解答的。 2. 先序遍历的遍历顺序是根节点，左孩子节点，右孩子结点。 代码实现/*  * Definition of TreeNode:">
 <meta property="og:image" content="http://yoursite.com/img/BinaryTreePreorderTraversal.jpg">
-<meta property="og:updated_time" content="2017-08-04T06:04:39.765Z">
+<meta property="og:updated_time" content="2017-08-04T09:16:21.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lintcode学习笔记之二叉树先序遍历">
 <meta name="twitter:description" content="题目描述 Given a binary tree, return the preorder traversal of its nodes’ values.  例子 return [1,2,4,5,3].   思考1. 二叉树的遍历是可以用递归和非递归的方法进行解答的。 2. 先序遍历的遍历顺序是根节点，左孩子节点，右孩子结点。 代码实现/*  * Definition of TreeNode:">
@@ -436,10 +436,11 @@ public class Solution{
   ArrayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();  
   if(root==null){return result;}
 
-  result.add(root.val);
+
   ArrayList&lt;Integer&gt; left=preorderTraversal(root.left); //左子树
   ArrayList&lt;Integer&gt; right=preorderTraversal(root.right);//右子树
 
+  result.add(root.val);
   result.addAll(left);  //合并左子树结果
   result.addAll(right); //合并右子树结果
 

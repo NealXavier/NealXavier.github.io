@@ -438,10 +438,11 @@ public class Solution{
   ArrayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();  
   if(root==null){return result;}
 
-  result.add(root.val);
+
   ArrayList&lt;Integer&gt; left=preorderTraversal(root.left); //左子树
   ArrayList&lt;Integer&gt; right=preorderTraversal(root.right);//右子树
 
+  result.add(root.val);
   result.addAll(left);  //合并左子树结果
   result.addAll(right); //合并右子树结果
 
