@@ -218,6 +218,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -599,65 +609,59 @@ public class Solution{
    //采用非递归的方法： 不停地找左子树的左子树，直到找到最左端的叶子结点，
    采用stack的存储根结点(每棵小树里面的)，再来找右子树，而遍历右子树用的还是左子树的套路。 
    public class Solution{
-   public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
-   ArayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();
-   Stack&lt;TreeNode&gt; stack=new Stack&lt;TreeNode&gt;();
-   TreeNode curt=root;
-   if(root==null){return result;} 
-   while(curt!=null || !stack.empty()) {
-   while(curt!=null){ 
-   result.add(curt.val); //保存根结点
-   stack.push(curt); //将根结点放在栈当中
-   curt=curt.left;   //继续找根节点的左孩子结点
-}
+   public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root) {  
+   ArrayList&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;();  
+   if(root == null)  {return res;}  
+   Stack&lt;TreeNode&gt; stack = new Stack&lt;TreeNode&gt;();  
+   while(root!=null || !stack.isEmpty()) {  
+    if(root!=null) {  
+        stack.push(root);  
+        res.add(root.val);  
+        root = root.left;  
+    }else {  
+        root = stack.pop();  
+        root = root.right;  
+    }  
+   } 
+    return res;  
+   }
+   }  
 
-   //这里出现有根结点但是没有左孩子的情况 。所以curt是空的。
-   // 有两种情况：1.有右孩子 2.无右孩子
-   curt=stack.pop();  //弹出该无左孩子的根结点
-   curt=curt.right;   //找到右孩子继续遍历 
- }
-  return result;
- }
-}  
-
-// 非递归方法(version 2) 该方法着眼于每颗由根节点、左孩子、右孩子构成的小树。
-public class Solution{
-public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
+ // 非递归方法(version 2) 该方法着眼于每颗由根节点、左孩子、右孩子构成的小树。
+ public class Solution{
+ public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
  if(root==null){return result;} //常规套路验证是否根节点为空
  ArayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();
  Stack&lt;TreeNode&gt; stack=new Stack&lt;TreeNode&gt;();
  stack.push(root);
  while(!stack.empty()){
-   TreeNode node=stack.pop();
-   result.add(node.val);
-   if(node.right!=null){
-   stack.push(node.right);
-   } //栈的特点是先进后出 先保留右孩子结点再保留左孩子结点
-   if(node.left!=null){
-   stack.push(node.left);
-   }
+    TreeNode node=stack.pop();
+    result.add(node.val);
+    //栈的特点是先进后出 先保留右孩子结点再保留左孩子结点
+    if(node.right!=null){ stack.push(node.right);} 
+    if(node.left!=null){ stack.push(node.left); }
 }
-reutrn result;  
+    reutrn result;  
   }
 }
 
 
 //分治法(Divide &amp; Conquer) 将整棵树看作一个整体，分别是根节点，左子树和右子树
 public class Solution{
-  public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
-  ArrayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();  
-  if(root==null){return result;}
+public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
+ArrayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();  
 
+if(root==null){return result;}
 
-  ArrayList&lt;Integer&gt; left=preorderTraversal(root.left); //左子树
-  ArrayList&lt;Integer&gt; right=preorderTraversal(root.right);//右子树
+ArrayList&lt;Integer&gt; left=preorderTraversal(root.left); //左子树
+ArrayList&lt;Integer&gt; right=preorderTraversal(root.right);//右子树
 
   result.add(root.val);
   result.addAll(left);  //合并左子树结果
   result.addAll(right); //合并右子树结果
 
   return result;
- } 
+  } 
 }
 </code></pre>
           
