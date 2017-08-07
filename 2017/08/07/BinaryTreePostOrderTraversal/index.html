@@ -93,19 +93,19 @@
 
 
 
-<meta name="description" content="题目描述 Given a binary tree, return the preorder traversal of its nodes’ values.  例子 return [1,2,4,5,3].   思考1. 二叉树的遍历是可以用递归和非递归的方法进行解答的。 2. 先序遍历的遍历顺序是根节点，左孩子节点，右孩子结点。 代码实现/*  * Definition of TreeNode:">
+<meta name="description" content="题目描述 Given a binary tree, return the postorder traversal of its nodes’ values.  例子  return [3,2,1].  思考 本质上和前后序遍历没有什么区别。 增加一个pre结点作为标志，标记之前的结点的位置，为了表示右孩子到底有没有遍历完从而决定要不要从栈当中弹出根节点。此外其实都是之前的老套路，还是先找到叶子结点">
 <meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lintcode学习笔记之二叉树先序遍历">
-<meta property="og:url" content="http://yoursite.com/2017/08/03/BinaryTreePreorderTraversal/index.html">
+<meta property="og:title" content="Lintcode学习笔记之二叉树后序遍历">
+<meta property="og:url" content="http://yoursite.com/2017/08/07/BinaryTreePostOrderTraversal/index.html">
 <meta property="og:site_name" content="Xavier&#39;s">
-<meta property="og:description" content="题目描述 Given a binary tree, return the preorder traversal of its nodes’ values.  例子 return [1,2,4,5,3].   思考1. 二叉树的遍历是可以用递归和非递归的方法进行解答的。 2. 先序遍历的遍历顺序是根节点，左孩子节点，右孩子结点。 代码实现/*  * Definition of TreeNode:">
-<meta property="og:image" content="http://yoursite.com/img/BinaryTreePreorderTraversal.jpg">
-<meta property="og:updated_time" content="2017-08-07T08:23:49.693Z">
+<meta property="og:description" content="题目描述 Given a binary tree, return the postorder traversal of its nodes’ values.  例子  return [3,2,1].  思考 本质上和前后序遍历没有什么区别。 增加一个pre结点作为标志，标记之前的结点的位置，为了表示右孩子到底有没有遍历完从而决定要不要从栈当中弹出根节点。此外其实都是之前的老套路，还是先找到叶子结点">
+<meta property="og:image" content="http://yoursite.com/img/PostOrder.jpg">
+<meta property="og:updated_time" content="2017-08-07T14:07:04.087Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lintcode学习笔记之二叉树先序遍历">
-<meta name="twitter:description" content="题目描述 Given a binary tree, return the preorder traversal of its nodes’ values.  例子 return [1,2,4,5,3].   思考1. 二叉树的遍历是可以用递归和非递归的方法进行解答的。 2. 先序遍历的遍历顺序是根节点，左孩子节点，右孩子结点。 代码实现/*  * Definition of TreeNode:">
-<meta name="twitter:image" content="http://yoursite.com/img/BinaryTreePreorderTraversal.jpg">
+<meta name="twitter:title" content="Lintcode学习笔记之二叉树后序遍历">
+<meta name="twitter:description" content="题目描述 Given a binary tree, return the postorder traversal of its nodes’ values.  例子  return [3,2,1].  思考 本质上和前后序遍历没有什么区别。 增加一个pre结点作为标志，标记之前的结点的位置，为了表示右孩子到底有没有遍历完从而决定要不要从栈当中弹出根节点。此外其实都是之前的老套路，还是先找到叶子结点">
+<meta name="twitter:image" content="http://yoursite.com/img/PostOrder.jpg">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/03/BinaryTreePreorderTraversal/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/07/BinaryTreePostOrderTraversal/"/>
 
 
 
 
 
-  <title>Lintcode学习笔记之二叉树先序遍历 | Xavier's</title>
+  <title>Lintcode学习笔记之二叉树后序遍历 | Xavier's</title>
   
 
 
@@ -278,7 +278,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/03/BinaryTreePreorderTraversal/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/BinaryTreePostOrderTraversal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Neal Xavier">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Lintcode学习笔记之二叉树先序遍历</h1>
+          <h1 class="post-title" itemprop="name headline">Lintcode学习笔记之二叉树后序遍历</h1>
         
 
         <div class="post-meta">
@@ -307,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T20:50:34+08:00">
-                2017-08-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-07T21:16:47+08:00">
+                2017-08-07
               </time>
             
 
@@ -365,95 +365,89 @@
 
       
         <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><blockquote>
-<p>Given a binary tree, return the preorder traversal of its nodes’ values.</p>
+<p>Given a binary tree, return the postorder traversal of its nodes’ values.</p>
 </blockquote>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><blockquote>
-<p>return [1,2,4,5,3].</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="/img/PostOrder.jpg" alt="photo"></p>
+<blockquote>
+<p>return [3,2,1].</p>
 </blockquote>
-<p><img src="/img/BinaryTreePreorderTraversal.jpg" alt="photo"></p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><pre><code>1. 二叉树的遍历是可以用递归和非递归的方法进行解答的。
-2. 先序遍历的遍历顺序是根节点，左孩子节点，右孩子结点。
-</code></pre><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>/*
- * Definition of TreeNode:
- * public class TreeNode {
- * public int val;
- * public TreeNode left, right;
- * public TreeNode(int val) {
- * this.val = val;
- * this.left = this.right = null;
- * }
- * }
- */
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ol>
+<li>本质上和前后序遍历没有什么区别。</li>
+<li>增加一个pre结点作为标志，标记之前的结点的位置，为了表示右孩子到底有没有遍历完从而决定要不要从栈当中弹出根节点。此外其实都是之前的老套路，还是先找到叶子结点的最左侧。</li>
+</ol>
+<h3 id="代码实现-不展示递归方法"><a href="#代码实现-不展示递归方法" class="headerlink" title="代码实现(不展示递归方法)"></a>代码实现(不展示递归方法)</h3><pre><code> // Iteration :
+下面在弹栈的时候需要分情况一下：
+1）如果当前栈顶元素的右结点存在并且还没访问过（也就是右结点不等于上一个访问结点），
+那么就把当前结点移到右结点继续循环；
+2）如果栈顶元素右结点是空或者已经访问过，那么说明栈顶元素的左右子树都访问完毕，
+应该访问自己继续回溯了。
+下面列举一下代码：
+     public class Solution{
+ public ArrayList&lt;Integer&gt; postorderTraversal(TreeNode root) {  
+ ArrayList&lt;Integer&gt; postOrder=new ArrayList&lt;Integer&gt;(); 
+ Stack&lt;TreeNode&gt; stack=new Stack&lt;TreeNode&gt;(); 
+ TreeNode pre=null,curr=root; //初始化当前的结点为root而pre(之前结点)为null
 
-//采用递归的方法，比较简单
-public class Solution{
-   //result的定义一定要在方法体之外，
-   ArayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();
-   public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
-   if(root==null){return result;} //常规套路验证是否根节点为空
-   result.add(root.val); //集合保存根节点的值
-   preorderTraversal(root.left); //遍历左子树
-   preorderTraversal(root.right);//遍历右子树
-   return result;
+while(curr!=null||!stack.empty()){  //遍历结束的条件是栈的值为空或者当前结点为空
+ if(curr!=null){            // 为了找到叶子结点的最左侧
+   stack.push(curr);
+   curr=curr.left;
+ }else{                     // 已经找到最左端的叶子结点
+   TreeNode peekNode=stack.peek();  // 不确定其还有没有右孩子所有不用pop方法
+   if(peekNode.right!=null&amp;&amp;pre!=peekNode.right){ // 如果该结点有右孩子并且它还没有被遍历过
+   curr=peekNode.right;  //将其右孩子替换成当前结点
+   }else{   //有两种情况 1. 其没有右孩子 2.其有右孩子 但是已经被遍历过了
+   stack.pop();     // 弹出该结点 
+   postOrder.add(peekNode.val);    
+   pre=peekNode;   // 修改pre(之前结点) ，将该结点作为当前结点 
+ }
+    }
   }
-}
+return postOrder;
+    }
+ }
 
-   //采用非递归的方法： 不停地找左子树的左子树，直到找到最左端的叶子结点，
-   采用stack的存储根结点(每棵小树里面的)，再来找右子树，而遍历右子树用的还是左子树的套路。 
-   public class Solution{
-   public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root) {  
-   ArrayList&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;();  
-   if(root == null)  {return res;}  
-   Stack&lt;TreeNode&gt; stack = new Stack&lt;TreeNode&gt;();  
-   while(root!=null || !stack.isEmpty()) {  
-    if(root!=null) {  
-        stack.push(root);  
-        res.add(root.val);  
-        root = root.left;  
-    }else {  
-        root = stack.pop();  
-        root = root.right;  
-    }  
-   } 
-    return res;  
-   }
-   }  
 
- // 非递归方法(version 2) 该方法着眼于每颗由根节点、左孩子、右孩子构成的小树。
+//version2 :Iteration
+ 思路：
+（1）如果pre的左孩子或者右孩子是cur，那么说明遍历在往下走，按访问顺序继续，
+ 即如果有左孩子，则是左孩子进栈，否则如果有右孩子，则是右孩子进栈，
+ 如果左右孩子都没有，则说明该结点是叶子，可以直接访问并把结点出栈了。
+ (2）如果反过来，cur的左孩子是pre，则说明已经在回溯往上走了，
+ 但是我们知道后序遍历要左右孩子走完才可以访问自己，
+ 所以这里如果有右孩子还需要把右孩子进栈，否则说明已经到自己了，可以访问并且出栈了。
+（3）如果cur的右孩子是pre，那么说明左右孩子都访问结束了，可以轮到自己了，
+ 访问并且出栈即可。 
  public class Solution{
- public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
- if(root==null){return result;} //常规套路验证是否根节点为空
- ArayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();
- Stack&lt;TreeNode&gt; stack=new Stack&lt;TreeNode&gt;();
- stack.push(root);
- while(!stack.empty()){
-    TreeNode node=stack.pop();
-    result.add(node.val);
-    //栈的特点是先进后出 先保留右孩子结点再保留左孩子结点
-    if(node.right!=null){ stack.push(node.right);} 
-    if(node.left!=null){ stack.push(node.left); }
-}
-    reutrn result;  
-  }
-}
-
-
-//分治法(Divide &amp; Conquer) 将整棵树看作一个整体，分别是根节点，左子树和右子树
-public class Solution{
-public ArrayList&lt;Integer&gt; preorderTraversal(TreeNode root){
-ArrayList&lt;Integer&gt; result=new ArrayList&lt;Integer&gt;();  
-
-if(root==null){return result;}
-
-ArrayList&lt;Integer&gt; left=preorderTraversal(root.left); //左子树
-ArrayList&lt;Integer&gt; right=preorderTraversal(root.right);//右子树
-
-  result.add(root.val);
-  result.addAll(left);  //合并左子树结果
-  result.addAll(right); //合并右子树结果
-
-  return result;
-  } 
+  public ArrayList&lt;Integer&gt; postorderTraversal(TreeNode root) {  
+  ArrayList&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;();  
+  if(root == null){ return res;}  
+  Stack&lt;TreeNode&gt; stack = new Stack&lt;TreeNode&gt;();  
+  stack.push(root);  
+  TreeNode pre = null;  
+  while(!stack.Empty()) {  
+  TreeNode cur = stack.peek(); //找到栈顶的值  
+  if(pre==null || pre.left==cur || pre.right==cur){ 
+  //1.为null还没开始开始遍历  2，3 表示 二叉树在往下遍历的过程中   
+        if(cur.left!=null) {    
+            stack.push(cur.left);  
+        } else if(cur.right!=null){  
+            stack.push(cur.right);  
+        }else{               // 没有左右孩子说明已经是在叶子结点，可以弹出栈
+            cur=stack.pop();
+            res.add(cur.val);  
+        }  
+    }else if(cur.left==pre &amp;&amp; cur.right!=null){  
+   // 说明二叉树在回溯的过程中并且当前右孩子结点还没有遍历过
+        stack.push(cur.right);  
+    }else{ // 1.cur没有右孩子  2.cur有右孩子结点但是已经遍历完毕  
+        res.add(cur.val);  
+        stack.pop();  
+    }  
+    pre = cur;    //修改当前pre(之前结点)的值 
+}  
+return res;  
+ } 
 }
 </code></pre>
       
@@ -497,8 +491,8 @@ ArrayList&lt;Integer&gt; right=preorderTraversal(root.right);//右子树
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/31/BalancedBinaryTree/" rel="next" title="Lintcode学习笔记之Balanced Binary Tree">
-                <i class="fa fa-chevron-left"></i> Lintcode学习笔记之Balanced Binary Tree
+              <a href="/2017/08/04/BinaryTreeInorderTraversal/" rel="next" title="Lintcode学习笔记之二叉树中序遍历">
+                <i class="fa fa-chevron-left"></i> Lintcode学习笔记之二叉树中序遍历
               </a>
             
           </div>
@@ -506,10 +500,6 @@ ArrayList&lt;Integer&gt; right=preorderTraversal(root.right);//右子树
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/04/BinaryTreeInorderTraversal/" rel="prev" title="Lintcode学习笔记之二叉树中序遍历">
-                Lintcode学习笔记之二叉树中序遍历 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -638,7 +628,7 @@ ArrayList&lt;Integer&gt; right=preorderTraversal(root.right);//右子树
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">4.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现-不展示递归方法"><span class="nav-number">4.</span> <span class="nav-text">代码实现(不展示递归方法)</span></a></li></ol></div>
             
 
           </div>
