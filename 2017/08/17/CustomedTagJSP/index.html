@@ -1,0 +1,782 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="customed tags," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="编写一个实现Tag接口的Java类（标签处理类）  查看Jsp规范文档，发现Tag接口有五个方法，又恰好TagSupport类继承了Tag并且默认实现了它，于是我们选择直接继承Tag接口的已知实现类TagSupport，因为它实现了Tag接口所有方法，重写我们所需要的方法。 代码实现（以输出客户机IP为例子）public class ViewIPTag extends TagSupport {">
+<meta name="keywords" content="customed tags">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义标签开发">
+<meta property="og:url" content="http://yoursite.com/2017/08/17/CustomedTagJSP/index.html">
+<meta property="og:site_name" content="Xavier&#39;s">
+<meta property="og:description" content="编写一个实现Tag接口的Java类（标签处理类）  查看Jsp规范文档，发现Tag接口有五个方法，又恰好TagSupport类继承了Tag并且默认实现了它，于是我们选择直接继承Tag接口的已知实现类TagSupport，因为它实现了Tag接口所有方法，重写我们所需要的方法。 代码实现（以输出客户机IP为例子）public class ViewIPTag extends TagSupport {">
+<meta property="og:image" content="http://yoursite.com/img/tags/CustomedTag.jpg">
+<meta property="og:updated_time" content="2017-08-17T12:40:54.224Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义标签开发">
+<meta name="twitter:description" content="编写一个实现Tag接口的Java类（标签处理类）  查看Jsp规范文档，发现Tag接口有五个方法，又恰好TagSupport类继承了Tag并且默认实现了它，于是我们选择直接继承Tag接口的已知实现类TagSupport，因为它实现了Tag接口所有方法，重写我们所需要的方法。 代码实现（以输出客户机IP为例子）public class ViewIPTag extends TagSupport {">
+<meta name="twitter:image" content="http://yoursite.com/img/tags/CustomedTag.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/17/CustomedTagJSP/"/>
+
+
+
+
+
+  <title>自定义标签开发 | Xavier's</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xavier's</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">trust the process</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/CustomedTagJSP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neal Xavier">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xavier's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">自定义标签开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T17:16:11+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb基础/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaWeb基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="编写一个实现Tag接口的Java类（标签处理类）"><a href="#编写一个实现Tag接口的Java类（标签处理类）" class="headerlink" title="编写一个实现Tag接口的Java类（标签处理类）"></a>编写一个实现Tag接口的Java类（标签处理类）</h3><p>  查看Jsp规范文档，发现Tag接口有五个方法，又恰好TagSupport类继承了Tag并且默认实现了它，于是我们选择直接继承Tag接口的已知实现类TagSupport，因为它实现了Tag接口所有方法，重写我们所需要的方法。</p>
+<h3 id="代码实现（以输出客户机IP为例子）"><a href="#代码实现（以输出客户机IP为例子）" class="headerlink" title="代码实现（以输出客户机IP为例子）"></a>代码实现（以输出客户机IP为例子）</h3><pre><code>public class ViewIPTag extends TagSupport {
+
+public int doStartTag() throws JspException {
+   HttpServletRequest request=(HttpServletRequest) this.pageContext.getRequest();
+   JspWriter out=this.pageContext.getOut();
+   try {
+        out.write(request.getRemoteAddr());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    return super.doStartTag();
+  }
+
+}
+</code></pre><h3 id="配置标签库符-tld-文件"><a href="#配置标签库符-tld-文件" class="headerlink" title="配置标签库符(tld)文件"></a>配置标签库符(tld)文件</h3><p> 在编写tld文件可以参考<strong><em>*(\Tomcat</em>_*\webapps\examples\WEB-INF\jsp2\jsp2-example-taglib)</strong> <strong>, 并且tld文件应该放在 </strong>WebRoot\WEB-INF** 目录下。</p>
+<h4 id="itcast-tld文件如下："><a href="#itcast-tld文件如下：" class="headerlink" title="itcast.tld文件如下："></a>itcast.tld文件如下：</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;taglib xmlns=&quot;http://java.sun.com/xml/ns/j2ee&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd&quot;
+version=&quot;2.0&quot;&gt;
+&lt;!-- description用来添加对taglib(标签库)的描述 --&gt;
+&lt;description&gt;Xavier自定义标签库开发&lt;/description&gt;
+&lt;tlib-version&gt;1.0&lt;/tlib-version&gt;
+&lt;short-name&gt;SimpleTagLibrary&lt;/short-name&gt;
+&lt;!-- 
+ 为自定义标签库设置一个uri,uri可以写成http://www.itcast.cn的形式便于像itcast.tld里面的所有标签都绑定到
+ &lt;uri&gt;http://www.itcast.cn&lt;/uri&gt;中。在jsp引用标签库的时候可以用&lt;%@taglib uri=&quot;http://www.itcast.cn&quot;%&gt;的形式找到
+ --&gt;
+
+&lt;uri&gt;http://itcast.cn&lt;/uri&gt;
+
+&lt;!-- 
+一个taglib(标签库)中包含多个自定义标签每一个自定义标签使用tag标记来描述
+一个tag标签对应一个自定义标签
+ --&gt;
+&lt;tag&gt;
+&lt;!-- 
+为标签处理类配置一个标签名,在Jsp页面中使用标签时是通过标签名来找到要调用的标签处理器类,
+通过ViewIP就能找到对应的标签处理的完整域名cn.itcast.web.tag.ViewIPTag
+ --&gt;
+&lt;name&gt;ViewIP&lt;/name&gt;
+&lt;tag-class&gt;cn.itcast.web.tag.ViewIPTag&lt;/tag-class&gt;&lt;!-- 映射到完整的class类上 --&gt;
+&lt;body-content&gt;empty&lt;/body-content&gt;&lt;!-- 有无标签体的内容 --&gt;
+&lt;/tag&gt; 
+</code></pre><h3 id="jsp页面引用标签"><a href="#jsp页面引用标签" class="headerlink" title="jsp页面引用标签"></a>jsp页面引用标签</h3><p>  <code>&lt;%@taglib uri=&quot;uri标签配置的内容&quot; prefix=&quot;标签使用前缀&quot;%&gt;</code></p>
+<h3 id="自定义标签的执行流程"><a href="#自定义标签的执行流程" class="headerlink" title="自定义标签的执行流程"></a>自定义标签的执行流程</h3><p>jsp引擎遇到自定义标签时，首先创建标签处理类的实例对象，然后按照jsp规范定义的通信规则一次调用它的方法。</p>
+<h4 id="1-public-void-setPageContext-PageContext-pageContext"><a href="#1-public-void-setPageContext-PageContext-pageContext" class="headerlink" title="1.public void setPageContext(PageContext pageContext) :"></a>1.public void setPageContext(PageContext pageContext) :</h4><p>jsp引擎实例化标签处理器后，将调用setPageContext方法将jsp页面的pageContext对象传递给标签处理器，标签处理器以后可以通过这个pageContext对象与jsp页面进行通信。</p>
+<h4 id="2-public-void-setParent-Tag-t"><a href="#2-public-void-setParent-Tag-t" class="headerlink" title="2.public void setParent(Tag t):"></a>2.public void setParent(Tag t):</h4><p>setPageContext方法执行之后，web容器接着调用setParent方法将当前标签的父标签传给当前标签处理器，如果标签没有父标签，则传给setParent方法的参数值为null</p>
+<h4 id="3-public-int-doStartTag"><a href="#3-public-int-doStartTag" class="headerlink" title="3.public int doStartTag():"></a>3.public int doStartTag():</h4><p>在调用完1，2两种方法之后，web容器执行自定义标签开始标记的时候开始调用doStartTag方法</p>
+<h4 id="4-public-int-doEndTag"><a href="#4-public-int-doEndTag" class="headerlink" title="4.public int doEndTag():"></a>4.public int doEndTag():</h4><p>在web容器执行完自定义标签的标签体后，执行自定义标签结束标签时，就会调用标签处理器的doEndTag</p>
+<h4 id="5-public-void-release"><a href="#5-public-void-release" class="headerlink" title="5.public void release():"></a>5.public void release():</h4><p>在web容器执行完自定义标签后，标签处理器会留在内存当中，为其他请求服务，直到web应用停止后，web容器才会调用release方法</p>
+<p><img src="/img/tags/CustomedTag.jpg" alt="CustomedTagTheory"></p>
+<h4 id="分析web容器调用这4个方法的过程"><a href="#分析web容器调用这4个方法的过程" class="headerlink" title="分析web容器调用这4个方法的过程"></a>分析web容器调用这4个方法的过程</h4><p>而在<strong>E:\Tomcat7\work\Catalina\localhost\day11\org\apache\jsp\viewip_jsp.java</strong>中将web容器调用以上5种方法的过程写的非常清楚。<br>其中几个过程来具体分析一下：</p>
+<h5 id="1-实例化cn-itcast-web-tag-ViewIPTag对象"><a href="#1-实例化cn-itcast-web-tag-ViewIPTag对象" class="headerlink" title="1. 实例化cn.itcast.web.tag.ViewIPTag对象"></a>1. 实例化cn.itcast.web.tag.ViewIPTag对象</h5><pre><code>cn.itcast.web.tag.ViewIPTag _jspx_th_neal_005fViewIP_005f0 = (cn.itcast.web.tag.ViewIPTag) _005fjspx_005ftagPool_005fneal_005fViewIP_005fnobody.get(cn.itcast.web.tag.ViewIPTag.class);
+</code></pre><h5 id="2-web容器调用setPageContext方法"><a href="#2-web容器调用setPageContext方法" class="headerlink" title="2. web容器调用setPageContext方法"></a>2. web容器调用setPageContext方法</h5><pre><code>_jspx_th_neal_005fViewIP_005f0.setPageContext(_jspx_page_context);
+</code></pre><h5 id="3-web容器调用setParent方法，传递null是因为该标签没有父标签"><a href="#3-web容器调用setParent方法，传递null是因为该标签没有父标签" class="headerlink" title="3. web容器调用setParent方法，传递null是因为该标签没有父标签"></a>3. web容器调用setParent方法，传递null是因为该标签没有父标签</h5><pre><code>_jspx_th_neal_005fViewIP_005f0.setParent(null); 
+</code></pre><h5 id="4-web容器开始执行自定义标签开始标记时，调用doStartTag方法，"><a href="#4-web容器开始执行自定义标签开始标记时，调用doStartTag方法，" class="headerlink" title="4. web容器开始执行自定义标签开始标记时，调用doStartTag方法，"></a>4. web容器开始执行自定义标签开始标记时，调用doStartTag方法，</h5><p>  <code>int _jspx_eval_neal_005fViewIP_005f0 = _jspx_th_neal_005fViewIP_005f0.doStartTag();</code></p>
+<h5 id="5-当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法"><a href="#5-当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法" class="headerlink" title="5.当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法"></a>5.当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法</h5><p>  <code>if (_jspx_th_neal_005fViewIP_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE)</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/customed-tags/" rel="tag"># customed tags</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/07/BinaryTreePostOrderTraversal/" rel="next" title="Lintcode学习笔记之二叉树后序遍历">
+                <i class="fa fa-chevron-left"></i> Lintcode学习笔记之二叉树后序遍历
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/images/avatar.png"
+               alt="Neal Xavier" />
+          <p class="site-author-name" itemprop="name">Neal Xavier</p>
+           
+              <p class="site-description motion-element" itemprop="description">Welcome to Xavier's Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编写一个实现Tag接口的Java类（标签处理类）"><span class="nav-number">1.</span> <span class="nav-text">编写一个实现Tag接口的Java类（标签处理类）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现（以输出客户机IP为例子）"><span class="nav-number">2.</span> <span class="nav-text">代码实现（以输出客户机IP为例子）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置标签库符-tld-文件"><span class="nav-number">3.</span> <span class="nav-text">配置标签库符(tld)文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#itcast-tld文件如下："><span class="nav-number">3.1.</span> <span class="nav-text">itcast.tld文件如下：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsp页面引用标签"><span class="nav-number">4.</span> <span class="nav-text">jsp页面引用标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义标签的执行流程"><span class="nav-number">5.</span> <span class="nav-text">自定义标签的执行流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-public-void-setPageContext-PageContext-pageContext"><span class="nav-number">5.1.</span> <span class="nav-text">1.public void setPageContext(PageContext pageContext) :</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-public-void-setParent-Tag-t"><span class="nav-number">5.2.</span> <span class="nav-text">2.public void setParent(Tag t):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-public-int-doStartTag"><span class="nav-number">5.3.</span> <span class="nav-text">3.public int doStartTag():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-public-int-doEndTag"><span class="nav-number">5.4.</span> <span class="nav-text">4.public int doEndTag():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-public-void-release"><span class="nav-number">5.5.</span> <span class="nav-text">5.public void release():</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析web容器调用这4个方法的过程"><span class="nav-number">5.6.</span> <span class="nav-text">分析web容器调用这4个方法的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-实例化cn-itcast-web-tag-ViewIPTag对象"><span class="nav-number">5.6.1.</span> <span class="nav-text">1. 实例化cn.itcast.web.tag.ViewIPTag对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-web容器调用setPageContext方法"><span class="nav-number">5.6.2.</span> <span class="nav-text">2. web容器调用setPageContext方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-web容器调用setParent方法，传递null是因为该标签没有父标签"><span class="nav-number">5.6.3.</span> <span class="nav-text">3. web容器调用setParent方法，传递null是因为该标签没有父标签</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-web容器开始执行自定义标签开始标记时，调用doStartTag方法，"><span class="nav-number">5.6.4.</span> <span class="nav-text">4. web容器开始执行自定义标签开始标记时，调用doStartTag方法，</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法"><span class="nav-number">5.6.5.</span> <span class="nav-text">5.当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Neal Xavier</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

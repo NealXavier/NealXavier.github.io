@@ -276,6 +276,198 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/CustomedTagJSP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neal Xavier">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xavier's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/17/CustomedTagJSP/" itemprop="url">自定义标签开发</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T17:16:11+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb基础/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaWeb基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="编写一个实现Tag接口的Java类（标签处理类）"><a href="#编写一个实现Tag接口的Java类（标签处理类）" class="headerlink" title="编写一个实现Tag接口的Java类（标签处理类）"></a>编写一个实现Tag接口的Java类（标签处理类）</h3><p>  查看Jsp规范文档，发现Tag接口有五个方法，又恰好TagSupport类继承了Tag并且默认实现了它，于是我们选择直接继承Tag接口的已知实现类TagSupport，因为它实现了Tag接口所有方法，重写我们所需要的方法。</p>
+<h3 id="代码实现（以输出客户机IP为例子）"><a href="#代码实现（以输出客户机IP为例子）" class="headerlink" title="代码实现（以输出客户机IP为例子）"></a>代码实现（以输出客户机IP为例子）</h3><pre><code>public class ViewIPTag extends TagSupport {
+
+public int doStartTag() throws JspException {
+   HttpServletRequest request=(HttpServletRequest) this.pageContext.getRequest();
+   JspWriter out=this.pageContext.getOut();
+   try {
+        out.write(request.getRemoteAddr());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    return super.doStartTag();
+  }
+
+}
+</code></pre><h3 id="配置标签库符-tld-文件"><a href="#配置标签库符-tld-文件" class="headerlink" title="配置标签库符(tld)文件"></a>配置标签库符(tld)文件</h3><p> 在编写tld文件可以参考<strong><em>*(\Tomcat</em>_*\webapps\examples\WEB-INF\jsp2\jsp2-example-taglib)</strong> <strong>, 并且tld文件应该放在 </strong>WebRoot\WEB-INF** 目录下。</p>
+<h4 id="itcast-tld文件如下："><a href="#itcast-tld文件如下：" class="headerlink" title="itcast.tld文件如下："></a>itcast.tld文件如下：</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;taglib xmlns=&quot;http://java.sun.com/xml/ns/j2ee&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd&quot;
+version=&quot;2.0&quot;&gt;
+&lt;!-- description用来添加对taglib(标签库)的描述 --&gt;
+&lt;description&gt;Xavier自定义标签库开发&lt;/description&gt;
+&lt;tlib-version&gt;1.0&lt;/tlib-version&gt;
+&lt;short-name&gt;SimpleTagLibrary&lt;/short-name&gt;
+&lt;!-- 
+ 为自定义标签库设置一个uri,uri可以写成http://www.itcast.cn的形式便于像itcast.tld里面的所有标签都绑定到
+ &lt;uri&gt;http://www.itcast.cn&lt;/uri&gt;中。在jsp引用标签库的时候可以用&lt;%@taglib uri=&quot;http://www.itcast.cn&quot;%&gt;的形式找到
+ --&gt;
+
+&lt;uri&gt;http://itcast.cn&lt;/uri&gt;
+
+&lt;!-- 
+一个taglib(标签库)中包含多个自定义标签每一个自定义标签使用tag标记来描述
+一个tag标签对应一个自定义标签
+ --&gt;
+&lt;tag&gt;
+&lt;!-- 
+为标签处理类配置一个标签名,在Jsp页面中使用标签时是通过标签名来找到要调用的标签处理器类,
+通过ViewIP就能找到对应的标签处理的完整域名cn.itcast.web.tag.ViewIPTag
+ --&gt;
+&lt;name&gt;ViewIP&lt;/name&gt;
+&lt;tag-class&gt;cn.itcast.web.tag.ViewIPTag&lt;/tag-class&gt;&lt;!-- 映射到完整的class类上 --&gt;
+&lt;body-content&gt;empty&lt;/body-content&gt;&lt;!-- 有无标签体的内容 --&gt;
+&lt;/tag&gt; 
+</code></pre><h3 id="jsp页面引用标签"><a href="#jsp页面引用标签" class="headerlink" title="jsp页面引用标签"></a>jsp页面引用标签</h3><p>  <code>&lt;%@taglib uri=&quot;uri标签配置的内容&quot; prefix=&quot;标签使用前缀&quot;%&gt;</code></p>
+<h3 id="自定义标签的执行流程"><a href="#自定义标签的执行流程" class="headerlink" title="自定义标签的执行流程"></a>自定义标签的执行流程</h3><p>jsp引擎遇到自定义标签时，首先创建标签处理类的实例对象，然后按照jsp规范定义的通信规则一次调用它的方法。</p>
+<h4 id="1-public-void-setPageContext-PageContext-pageContext"><a href="#1-public-void-setPageContext-PageContext-pageContext" class="headerlink" title="1.public void setPageContext(PageContext pageContext) :"></a>1.public void setPageContext(PageContext pageContext) :</h4><p>jsp引擎实例化标签处理器后，将调用setPageContext方法将jsp页面的pageContext对象传递给标签处理器，标签处理器以后可以通过这个pageContext对象与jsp页面进行通信。</p>
+<h4 id="2-public-void-setParent-Tag-t"><a href="#2-public-void-setParent-Tag-t" class="headerlink" title="2.public void setParent(Tag t):"></a>2.public void setParent(Tag t):</h4><p>setPageContext方法执行之后，web容器接着调用setParent方法将当前标签的父标签传给当前标签处理器，如果标签没有父标签，则传给setParent方法的参数值为null</p>
+<h4 id="3-public-int-doStartTag"><a href="#3-public-int-doStartTag" class="headerlink" title="3.public int doStartTag():"></a>3.public int doStartTag():</h4><p>在调用完1，2两种方法之后，web容器执行自定义标签开始标记的时候开始调用doStartTag方法</p>
+<h4 id="4-public-int-doEndTag"><a href="#4-public-int-doEndTag" class="headerlink" title="4.public int doEndTag():"></a>4.public int doEndTag():</h4><p>在web容器执行完自定义标签的标签体后，执行自定义标签结束标签时，就会调用标签处理器的doEndTag</p>
+<h4 id="5-public-void-release"><a href="#5-public-void-release" class="headerlink" title="5.public void release():"></a>5.public void release():</h4><p>在web容器执行完自定义标签后，标签处理器会留在内存当中，为其他请求服务，直到web应用停止后，web容器才会调用release方法</p>
+<p><img src="/img/tags/CustomedTag.jpg" alt="CustomedTagTheory"></p>
+<h4 id="分析web容器调用这4个方法的过程"><a href="#分析web容器调用这4个方法的过程" class="headerlink" title="分析web容器调用这4个方法的过程"></a>分析web容器调用这4个方法的过程</h4><p>而在<strong>E:\Tomcat7\work\Catalina\localhost\day11\org\apache\jsp\viewip_jsp.java</strong>中将web容器调用以上5种方法的过程写的非常清楚。<br>其中几个过程来具体分析一下：</p>
+<h5 id="1-实例化cn-itcast-web-tag-ViewIPTag对象"><a href="#1-实例化cn-itcast-web-tag-ViewIPTag对象" class="headerlink" title="1. 实例化cn.itcast.web.tag.ViewIPTag对象"></a>1. 实例化cn.itcast.web.tag.ViewIPTag对象</h5><pre><code>cn.itcast.web.tag.ViewIPTag _jspx_th_neal_005fViewIP_005f0 = (cn.itcast.web.tag.ViewIPTag) _005fjspx_005ftagPool_005fneal_005fViewIP_005fnobody.get(cn.itcast.web.tag.ViewIPTag.class);
+</code></pre><h5 id="2-web容器调用setPageContext方法"><a href="#2-web容器调用setPageContext方法" class="headerlink" title="2. web容器调用setPageContext方法"></a>2. web容器调用setPageContext方法</h5><pre><code>_jspx_th_neal_005fViewIP_005f0.setPageContext(_jspx_page_context);
+</code></pre><h5 id="3-web容器调用setParent方法，传递null是因为该标签没有父标签"><a href="#3-web容器调用setParent方法，传递null是因为该标签没有父标签" class="headerlink" title="3. web容器调用setParent方法，传递null是因为该标签没有父标签"></a>3. web容器调用setParent方法，传递null是因为该标签没有父标签</h5><pre><code>_jspx_th_neal_005fViewIP_005f0.setParent(null); 
+</code></pre><h5 id="4-web容器开始执行自定义标签开始标记时，调用doStartTag方法，"><a href="#4-web容器开始执行自定义标签开始标记时，调用doStartTag方法，" class="headerlink" title="4. web容器开始执行自定义标签开始标记时，调用doStartTag方法，"></a>4. web容器开始执行自定义标签开始标记时，调用doStartTag方法，</h5><p>  <code>int _jspx_eval_neal_005fViewIP_005f0 = _jspx_th_neal_005fViewIP_005f0.doStartTag();</code></p>
+<h5 id="5-当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法"><a href="#5-当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法" class="headerlink" title="5.当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法"></a>5.当web容器执行完标签体后，开始执行结束标签时调用doEndTag方法</h5><p>  <code>if (_jspx_th_neal_005fViewIP_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE)</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/BinaryTreePostOrderTraversal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1351,7 +1543,7 @@ return head.next;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1362,7 +1554,7 @@ return head.next;
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1373,7 +1565,7 @@ return head.next;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
