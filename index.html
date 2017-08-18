@@ -276,6 +276,184 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/18/ObjectMethodOfEquals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neal Xavier">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xavier's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/18/ObjectMethodOfEquals/" itemprop="url">Object类的equals方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T17:05:03+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE基础/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSE基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="equals方法的源代码写法："><a href="#equals方法的源代码写法：" class="headerlink" title="equals方法的源代码写法："></a>equals方法的源代码写法：</h3><blockquote>
+<p>public boolean equals(Object obj) {return (this == obj);}</p>
+</blockquote>
+<p>从以上源代码可以看出，默认情况比较的是地址值，因为比较地址值一般来说意义不大所以我们要重写该方法。改写成比较该类的所有属性是否相等的equals方法。</p>
+<h3 id="equals方法的改写"><a href="#equals方法的改写" class="headerlink" title="equals方法的改写"></a>equals方法的改写</h3><pre><code>public boolean equals(Object obj) {
+    //为了提高效率
+
+    //源代码写法，对象都是同一个肯定相同
+    if(this == obj){
+        return true;
+    }
+
+    //为了提供程序的健壮性
+    //我先判断一下，obj是不是学生的一个对象，如果是，再做向下转型，如果不是，直接返回false。
+    //这个时候，我们要判断的是对象是否是某个类的对象?
+    //记住一个格式：对象名 instanceof 类名
+    //表示：判断该对象名是否是该类名一个对象
+    if(!(obj instanceof Student)){
+        return false;
+    }
+    //如果是就继续
+
+    Student s = (Student)obj;
+    // 比较每个属性的大小是否相同
+    return this.name.equals(s.name) &amp;&amp; this.age == s.age;
+</code></pre><p>这个代码还有最终版本:</p>
+<pre><code>@Override
+public boolean equals(Object obj) {
+    if (this == obj)         // 对象相同
+        return true;
+    if (obj == null)         // 传入的参数为空
+        return false;
+    if (getClass() != obj.getClass())   // 编译的class文件不是同一个肯定不相同 等价于instanceOf
+        return false;
+    Student other = (Student) obj;     // 强制转成Student对象再进行比较
+    if (age != other.age)              
+        return false;
+    if (name == null) {
+        if (other.name != null)
+            return false;
+    } else if (!name.equals(other.name))
+        return false;
+    return true;
+}
+</code></pre><h3 id="面试考法：-和equals-方法的区别？"><a href="#面试考法：-和equals-方法的区别？" class="headerlink" title="面试考法：==和equals()方法的区别？"></a>面试考法：==和equals()方法的区别？</h3><p> A.==<br>    基本类型：比较的是值是否相同<br>    引用类型：比较的是地址值是否相同<br> B.equals()<br>    只能比较引用类型。默认情况下，比较的是地址值是否相同。<br>    但是，我们可以根据自己的需要重写该方法。 </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/18/BasicWebKnowledge/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1842,7 +2020,7 @@ return head.next;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1853,7 +2031,7 @@ return head.next;
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1864,7 +2042,7 @@ return head.next;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
