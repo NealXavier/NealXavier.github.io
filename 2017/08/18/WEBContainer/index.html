@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Algorithm," />
+  <meta name="keywords" content="WebContainer," />
 
 
 
@@ -93,19 +93,17 @@
 
 
 
-<meta name="description" content="问题描述 Given a binary tree, determine if it is height-balanced.For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never diff">
-<meta name="keywords" content="Algorithm">
+<meta name="description" content="Web容器什么叫Web容器Servlet没有main方法。Servlet受控于另一个Java应用，这个Java应用成为容器。Tomcat就是这样一个容器。（而不是其他请求，如请求一个普通的静态如果web服务器一个用得到一个指向Servlet的请求Html），此时服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器调用Servlet方法，如doPost()或者do">
+<meta name="keywords" content="WebContainer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lintcode学习笔记之Balanced Binary Tree">
-<meta property="og:url" content="http://yoursite.com/2017/07/31/BalancedBinaryTree/index.html">
+<meta property="og:title" content="浅析Web容器">
+<meta property="og:url" content="http://yoursite.com/2017/08/18/WEBContainer/index.html">
 <meta property="og:site_name" content="Xavier&#39;s">
-<meta property="og:description" content="问题描述 Given a binary tree, determine if it is height-balanced.For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never diff">
-<meta property="og:image" content="http://yoursite.com/img/BalancedBinaryTree.jpg">
-<meta property="og:updated_time" content="2017-07-31T07:33:07.278Z">
+<meta property="og:description" content="Web容器什么叫Web容器Servlet没有main方法。Servlet受控于另一个Java应用，这个Java应用成为容器。Tomcat就是这样一个容器。（而不是其他请求，如请求一个普通的静态如果web服务器一个用得到一个指向Servlet的请求Html），此时服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器调用Servlet方法，如doPost()或者do">
+<meta property="og:updated_time" content="2017-08-18T05:46:01.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lintcode学习笔记之Balanced Binary Tree">
-<meta name="twitter:description" content="问题描述 Given a binary tree, determine if it is height-balanced.For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never diff">
-<meta name="twitter:image" content="http://yoursite.com/img/BalancedBinaryTree.jpg">
+<meta name="twitter:title" content="浅析Web容器">
+<meta name="twitter:description" content="Web容器什么叫Web容器Servlet没有main方法。Servlet受控于另一个Java应用，这个Java应用成为容器。Tomcat就是这样一个容器。（而不是其他请求，如请求一个普通的静态如果web服务器一个用得到一个指向Servlet的请求Html），此时服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器调用Servlet方法，如doPost()或者do">
 
 
 
@@ -133,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/31/BalancedBinaryTree/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/18/WEBContainer/"/>
 
 
 
 
 
-  <title>Lintcode学习笔记之Balanced Binary Tree | Xavier's</title>
+  <title>浅析Web容器 | Xavier's</title>
   
 
 
@@ -278,7 +276,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/31/BalancedBinaryTree/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/18/WEBContainer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Neal Xavier">
@@ -295,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Lintcode学习笔记之Balanced Binary Tree</h1>
+          <h1 class="post-title" itemprop="name headline">浅析Web容器</h1>
         
 
         <div class="post-meta">
@@ -307,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-31T14:29:29+08:00">
-                2017-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T10:40:10+08:00">
+                2017-08-18
               </time>
             
 
@@ -330,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法学习/" itemprop="url" rel="index">
-                    <span itemprop="name">算法学习</span>
+                  <a href="/categories/JavaWeb基础/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaWeb基础</span>
                   </a>
                 </span>
 
@@ -364,61 +362,30 @@
       
 
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><blockquote>
-<p>Given a binary tree, determine if it is height-balanced.<br>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.</p>
-</blockquote>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><blockquote>
-<p>Given binary tree A = {3,9,20,#,#,15,7}, B = {3,#,20,15,7}</p>
-</blockquote>
-<p><img src="/img/BalancedBinaryTree.jpg" alt="photo"></p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><pre><code>分支条件
-1.空节点的二叉树
-2.在根节点的下的左右子树的深度相差已经&gt;1
-3.在2条件不成立，继续遍历分别以左右子树作为根节点的情况
-</code></pre><h3 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h3><pre><code>/**
- * //定义一棵树 
- * Definition of TreeNode:
- * public class TreeNode {
- * public int val;
- * public TreeNode left, right;
- * public TreeNode(int val) {
- * this.val = val;
- * this.left = this.right = null;
- * }
- * }
- */
+        <h3 id="Web容器"><a href="#Web容器" class="headerlink" title="Web容器"></a>Web容器</h3><h4 id="什么叫Web容器"><a href="#什么叫Web容器" class="headerlink" title="什么叫Web容器"></a>什么叫Web容器</h4><p>Servlet没有main方法。Servlet受控于另一个Java应用，这个Java应用成为容器。Tomcat就是这样一<br>个容器。（而不是其他请求，如请求一个普通的静态如果web服务器一个用得到一个指向Servlet的请求<br>Html），此时服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器调用<br>Servlet方法，如doPost()或者doGet()方法。</p>
+<h4 id="容器能提供什么"><a href="#容器能提供什么" class="headerlink" title="容器能提供什么"></a>容器能提供什么</h4><p><strong>通信支持</strong>：利用容器提供的方法，能让Servlet与Web服务器对话；</p>
+<p><strong>生命周期管理</strong>：容器控制着Servlet的生死。它会负责加载类，实例和初始化Servlet，调用Servlet方法，并使Servlet实例能够被垃圾回收。</p>
+<p><strong>声明方式实现安全</strong>：利用容器，可以使用Xml部署描述文件配置（或修改）安全性，而不必将硬编码写到Servlet（或其他）类代码中。</p>
+<p><strong>Jsp支持</strong>：负责将Jsp代码翻译成java文件放在 <strong>Tomcat\work\Catalina\localhost\web应用</strong>   下。</p>
+<h4 id="Web容器的工作原理"><a href="#Web容器的工作原理" class="headerlink" title="Web容器的工作原理"></a>Web容器的工作原理</h4><p>Web容器是一种服务程序，是能够支持发布web程序的软件，在服务器一个端口就有一个提供相应服务的程序，而这个程序就是处理从客户端发出的请求，如Java种的Tomcat容器，ASP的IIS或者PWS都是这样的容器。<strong>一个服务器可以有多个容器。</strong></p>
+<p>在B/S结构下，以常见的自来水供水系统而言。整个Web系统好比完整的供水系统，用户只需要有水龙头(Browser)，水管相当于网络（Network），自来水公司的供水系统（Server），其中的压力水罐就是容器（Container）。</p>
+<h3 id="浅析Tomcat"><a href="#浅析Tomcat" class="headerlink" title="浅析Tomcat"></a>浅析Tomcat</h3><h4 id="Tomcat的简单介绍"><a href="#Tomcat的简单介绍" class="headerlink" title="Tomcat的简单介绍"></a>Tomcat的简单介绍</h4><p>  Tomcat是一个小型的轻量级应用服务器，很瘦广大程序员的喜欢。因为它它运行时占用的系统资源小，扩展性好支持负载平衡与邮件服务等开发应用系统常用的功能；而且它还在不断的改进和完善中。</p>
+<p>一般认为，当在一台机器上配置好Apache服务器，可利用它响应对Html页面和Servlet。实际上Tomcat部分是Apache服务器的扩展，但它是独立运行的，所以当你运行Tomcat时，它实际上作为一个与Apache独立的进程单独运行。</p>
+<p>当配置正确时，Apache为Html页面服务，而Tomcat实际上运行Jsp页面和Servlet。另外，Tomcat和IIS，Apache等Web服务器一样，具有处理Html页面的功能，另外它还是一个Servlet和Jsp容器，独立的Servlet容器是Tomcat的默认模式。<strong>不过，Tomcat处理静态Html的能力不如Apache服务器。</strong></p>
+<p>Tomcat是Apache-Jarkarta的一个子项目，<strong>是一个开放式源码，免费支持Jsp和Servlet技术的容器，它同时又是一个Web服务器软件</strong>。<strong><em>Servlet和Jsp两者分工协作，Servlet侧重于解决运算和业务逻辑问题，Jsp则重点解决展示问题。</em></strong></p>
+<h4 id="Tomcat目录结构分析"><a href="#Tomcat目录结构分析" class="headerlink" title="Tomcat目录结构分析"></a>Tomcat目录结构分析</h4><p>Web应用程序需要部署到Web容器种才能运行，两者都必须符合JavaEE规范。Web容器的应用程序规范如下：</p>
+<p>1.目录结构规范：JavaWeb程序的所有文件都包含在一个文件夹中，包含WEB-INF子文件夹和META-INF子文件夹，WEB-INF文件夹包含classes文件夹和lib文件夹以及web.xml。</p>
+<p><strong>Tomcat的结构目录如下：</strong></p>
+<p>/bin：包含启动和关闭Tomcat的文件</p>
+<p>/conf：包含不同的配置文件:server.xml,web.xml,tomcat-user.xml</p>
+<p>/lib：包含Tomcat使用的Jar文件</p>
+<p>/logs：包含日志文件</p>
+<p>/webapps：包含应用程序实例及自己开发的程序</p>
+<p>/work：包含Jsp生成的Servlet（即.java文件）</p>
+<p>2.Jar文件放在WEB-INF/lib文件夹中。</p>
+<p>3.web.xml规范：是整个web应用程序的描述文件，里面定义者该Web应用程序可供访问的信息资源以及这些资源的行为，包括Servlet，过滤器，监听器，安全验证等信息资源。</p>
+<p>4.其他资源文件，如jsp，html，图片和声音的放在与WEB-INF同一级目录下，因为WEB-INF文件夹对于客户端是不可见的。</p>
 
-public class Solution {
-/**
- * @param root: The root of binary tree.
- * @return: True if this Binary tree is Balanced, or false.
- */
- // TotalTime :1947ms
-public boolean isBalanced(TreeNode root) {
-// write your code here
-if(root==null) {return true;} // 根节点为空的情况返回 true
-int left=depth(root.left);    // 通过depth(TreeNode)方法得到左子树的深度
-int right=depth(root.right);  // 同理
-if(left-right&gt;1||left-right&lt;-1){ //两颗子树的深度相差超过1
-return false;
-}else{
-return isBalanced(root.left)&amp;&amp;isBalanced(root.right); // 继续与左右子树作为根节点进行遍历
-}
-
-}
-private int depth(TreeNode node){
-if(node==null){
-return 0;
-}else if(node.left==null&amp;&amp;node.right==null){
-return 1;
-}else{
-int left=depth(node.left);
-int right=depth(node.right);
-return 1+(left&gt;right?left:right);
-}
-}
-}
-</code></pre>
       
     </div>
 
@@ -447,7 +414,7 @@ return 1+(left&gt;right?left:right);
       
         <div class="post-tags">
           
-            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+            <a href="/tags/WebContainer/" rel="tag"># WebContainer</a>
           
         </div>
       
@@ -460,8 +427,8 @@ return 1+(left&gt;right?left:right);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/29/AddTwoNumbers/" rel="next" title="Lintcode学习笔记之Add Two Numbers">
-                <i class="fa fa-chevron-left"></i> Lintcode学习笔记之Add Two Numbers
+              <a href="/2017/08/17/CustomedTagJSP/" rel="next" title="自定义标签开发">
+                <i class="fa fa-chevron-left"></i> 自定义标签开发
               </a>
             
           </div>
@@ -469,10 +436,6 @@ return 1+(left&gt;right?left:right);
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/03/BinaryTreePreorderTraversal/" rel="prev" title="Lintcode学习笔记之二叉树先序遍历">
-                Lintcode学习笔记之二叉树先序遍历 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -601,7 +564,7 @@ return 1+(left&gt;right?left:right);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码展示"><span class="nav-number">4.</span> <span class="nav-text">代码展示</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web容器"><span class="nav-number">1.</span> <span class="nav-text">Web容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么叫Web容器"><span class="nav-number">1.1.</span> <span class="nav-text">什么叫Web容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容器能提供什么"><span class="nav-number">1.2.</span> <span class="nav-text">容器能提供什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web容器的工作原理"><span class="nav-number">1.3.</span> <span class="nav-text">Web容器的工作原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅析Tomcat"><span class="nav-number">2.</span> <span class="nav-text">浅析Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tomcat的简单介绍"><span class="nav-number">2.1.</span> <span class="nav-text">Tomcat的简单介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tomcat目录结构分析"><span class="nav-number">2.2.</span> <span class="nav-text">Tomcat目录结构分析</span></a></li></ol></li></ol></div>
             
 
           </div>
