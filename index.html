@@ -276,6 +276,149 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/18/BasicWebKnowledge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neal Xavier">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xavier's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/18/BasicWebKnowledge/" itemprop="url">Web应用的相关知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T13:56:47+08:00">
+                2017-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb基础/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaWeb基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>Web浏览器除了可以从本地硬盘上打开网页文档外，还可以使用HTTP网络协议从网络上的Web服务器（也叫www服务器）上获取网页文档的内容。</p>
+<p><strong>Web浏览器与Web服务器分别代表着TCP网络程序的客户机和服务器，可以把Web服务器想象成在网络上放置的一块硬盘，网页文档就放在那个硬盘上</strong>，Web浏览器要从远程网络上的硬盘中读取数据远比直接从本地硬盘上读取数据复杂，因为它与Web服务器之间需要一问一答的交互过程。</p>
+<p>就像两个国家元首的会晤过程得遵守一定的外交礼节一样，Web浏览器与Web服务器的交互过程也得遵循一定的规则，这个规则就是HTTP协议。Web浏览器与Web服务器建立TCP网络连接后，Web浏览器按照HTTP协议的规定向Web服务器发出请求信息，Web服务器接收到浏览器的请求后，在按照HTTP协议的要求将结果发送给Web浏览器。在正常情况下，Web服务器返回的结果包含Web浏览器。在正常情况下，Web服务器返回的结果中包含Web浏览器请求的网页文档内容，Web浏览器接收到这些内容后，在进行解释和显示。</p>
+<h3 id="主要的Web服务器软件"><a href="#主要的Web服务器软件" class="headerlink" title="主要的Web服务器软件"></a>主要的Web服务器软件</h3><p>无论网络规模的大小，最起码的工作就是要在用做Web服务器的计算机上安装某种Web服务器软件。目前主要的两种Web服务器软件IIS和Apache，但是他们都不直接支持Sevlet和JSP程序。要想在这些Web服务器软件中运行Servlet和JSP，还必须将他们与某种Servlet和JSP容器进行集成。</p>
+<p><strong>Tomcat是Sun公司推荐的运行Servlet和JSP的容器，它可以被继集成IIS和Apache中。另外，Tomcat也具有Web服务器的一些基本功能对于一般的应用情况，也可以直接将Tomcat作为Web服务器软件运行。</strong></p>
+<h3 id="网站系统的组成"><a href="#网站系统的组成" class="headerlink" title="网站系统的组成"></a>网站系统的组成</h3><p>只要在一台计算机上安装了Web服务器软件，从功能上讲，这台计算机就可以称为Web服务器。一个网站的规模可大可小，功能可多可少。<strong>最简单的网站只需要Web服务器即可对外提供网页浏览服务。复杂的网站包括多台Web服务器组成的集群系统，负载均衡设备，具有缓存功能的代理服务器</strong>（可以有多级，甚至包括放置在服务器端的缓存系统），数据库系统等，如下图：</p>
+<p><img src="/img/WebBase/1.jpg" alt="server"></p>
+<p>www.sina.com网络系统目前采用的基本如上图的架构，<strong>不同地区的人们在访问www.sina.com站点时，浏览器实际上所访问的服务器是不一样的</strong>，例如，吉林省的用户访问的服务器实际是Sina放在吉林地区的代理服务器，湖北省的用户访问的服务器实际是湖北地区的代理服务器。各地区的浏览器访问www.sina.com站点的过程如下图所示：</p>
+<p><img src="/img/WebBase/2.jpg" alt="calledserver"></p>
+<p>为了能够让浏览器透明地访问到Web站点，让用户感觉不到在访问区域代理服务器，在DNS系统中需要将www.sina.com主机名指向所有区域的代理服务器的IP地址。<strong>在浏览器访问www.sina.com站点中的页面而向DNS服务器请求解析www.sina.com主机名时，DNS服务器根据访问者的地理位置信息返回他附近的区域代理服务器的IP地址，这样浏览器的访问请求将发送给该区域代理服务器。只有当区域代理服务器中没有浏览器要访问的页面时，区域代理服务器才去从真正的www.sina.com站点服务器上获取该页面并进行缓存</strong>，以后该区域的其他浏览器就都可以就近从区域代理服务器中访问到该页面，从而大大提高访问效率且减少骨干网络的流量。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/18/WEBContainer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1699,7 +1842,7 @@ return head.next;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1721,7 +1864,7 @@ return head.next;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
