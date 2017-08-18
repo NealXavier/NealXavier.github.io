@@ -366,14 +366,14 @@
       
         
           
-            <h3 id="Web容器"><a href="#Web容器" class="headerlink" title="Web容器"></a>Web容器</h3><h4 id="什么叫Web容器"><a href="#什么叫Web容器" class="headerlink" title="什么叫Web容器"></a>什么叫Web容器</h4><p>Servlet没有main方法。Servlet受控于另一个Java应用，这个Java应用成为容器。Tomcat就是这样一<br>个容器。（而不是其他请求，如请求一个普通的静态如果web服务器一个用得到一个指向Servlet的请求<br>Html），此时服务器不是把这个请求交给servlet本身，而是交给部署该Servlet的容器，要由容器调用<br>Servlet方法，如doPost()或者doGet()方法。</p>
+            <h3 id="Web容器"><a href="#Web容器" class="headerlink" title="Web容器"></a>Web容器</h3><h4 id="什么叫Web容器"><a href="#什么叫Web容器" class="headerlink" title="什么叫Web容器"></a>什么叫Web容器</h4><p>Servlet没有main方法。Servlet受控于另一个Java应用，这个Java应用成为容器。Tomcat就是这样一<br>个容器。（而不是其他请求，如请求一个普通的静态Html），此时服务器不是把这个请求交给Servlet本身，而是交给部署该Servlet的容器，要由容器调用<br>Servlet方法，如doPost()或者doGet()方法。</p>
 <h4 id="容器能提供什么"><a href="#容器能提供什么" class="headerlink" title="容器能提供什么"></a>容器能提供什么</h4><p><strong>通信支持</strong>：利用容器提供的方法，能让Servlet与Web服务器对话；</p>
 <p><strong>生命周期管理</strong>：容器控制着Servlet的生死。它会负责加载类，实例和初始化Servlet，调用Servlet方法，并使Servlet实例能够被垃圾回收。</p>
 <p><strong>声明方式实现安全</strong>：利用容器，可以使用Xml部署描述文件配置（或修改）安全性，而不必将硬编码写到Servlet（或其他）类代码中。</p>
-<p><strong>Jsp支持</strong>：负责将Jsp代码翻译成java文件放在 <strong>Tomcat\work\Catalina\localhost\web应用</strong>   下。</p>
+<p><strong>Jsp支持</strong>：负责将Jsp代码翻译成Java文件放在 <strong>Tomcat\work\Catalina\localhost\web应用</strong>   下。</p>
 <h4 id="Web容器的工作原理"><a href="#Web容器的工作原理" class="headerlink" title="Web容器的工作原理"></a>Web容器的工作原理</h4><p>Web容器是一种服务程序，是能够支持发布web程序的软件，在服务器一个端口就有一个提供相应服务的程序，而这个程序就是处理从客户端发出的请求，如Java种的Tomcat容器，ASP的IIS或者PWS都是这样的容器。<strong>一个服务器可以有多个容器。</strong></p>
 <p>在B/S结构下，以常见的自来水供水系统而言。整个Web系统好比完整的供水系统，用户只需要有水龙头(Browser)，水管相当于网络（Network），自来水公司的供水系统（Server），其中的压力水罐就是容器（Container）。</p>
-<h3 id="浅析Tomcat"><a href="#浅析Tomcat" class="headerlink" title="浅析Tomcat"></a>浅析Tomcat</h3><h4 id="Tomcat的简单介绍"><a href="#Tomcat的简单介绍" class="headerlink" title="Tomcat的简单介绍"></a>Tomcat的简单介绍</h4><p>  Tomcat是一个小型的轻量级应用服务器，很瘦广大程序员的喜欢。因为它它运行时占用的系统资源小，扩展性好支持负载平衡与邮件服务等开发应用系统常用的功能；而且它还在不断的改进和完善中。</p>
+<h3 id="浅析Tomcat"><a href="#浅析Tomcat" class="headerlink" title="浅析Tomcat"></a>浅析Tomcat</h3><h4 id="Tomcat的简单介绍"><a href="#Tomcat的简单介绍" class="headerlink" title="Tomcat的简单介绍"></a>Tomcat的简单介绍</h4><p>  Tomcat是一个小型的轻量级应用服务器，很受广大程序员的喜欢。因为它运行时占用的系统资源小，扩展性好支持负载平衡与邮件服务等开发应用系统常用的功能；而且它还在不断的改进和完善中。</p>
 <p>一般认为，当在一台机器上配置好Apache服务器，可利用它响应对Html页面和Servlet。实际上Tomcat部分是Apache服务器的扩展，但它是独立运行的，所以当你运行Tomcat时，它实际上作为一个与Apache独立的进程单独运行。</p>
 <p>当配置正确时，Apache为Html页面服务，而Tomcat实际上运行Jsp页面和Servlet。另外，Tomcat和IIS，Apache等Web服务器一样，具有处理Html页面的功能，另外它还是一个Servlet和Jsp容器，独立的Servlet容器是Tomcat的默认模式。<strong>不过，Tomcat处理静态Html的能力不如Apache服务器。</strong></p>
 <p>Tomcat是Apache-Jarkarta的一个子项目，<strong>是一个开放式源码，免费支持Jsp和Servlet技术的容器，它同时又是一个Web服务器软件</strong>。<strong><em>Servlet和Jsp两者分工协作，Servlet侧重于解决运算和业务逻辑问题，Jsp则重点解决展示问题。</em></strong></p>
