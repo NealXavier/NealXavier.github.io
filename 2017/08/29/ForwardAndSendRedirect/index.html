@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="forward,sendRedirect," />
 
 
 
@@ -93,15 +93,17 @@
 
 
 
-<meta name="description" content="Welcome to Xavier&apos;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xavier&#39;s">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta name="description" content="尽管HttpServleResponse.sendRedirect和RequestDispatcher.forward方法都可以让浏览器获得另外一个URL所指向的资源，但两者的内部运行机制有着很大的区别。下面是sendRedirect方法实现的请求重定向与forward方法实现的请求转发的总结比较： （1）forward方法只能将请求转发给同一个Web应用中的组件,而sendRedirect方法不">
+<meta name="keywords" content="forward,sendRedirect">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb中实现跳转forward和sendRedirect的不同">
+<meta property="og:url" content="http://yoursite.com/2017/08/29/ForwardAndSendRedirect/index.html">
 <meta property="og:site_name" content="Xavier&#39;s">
-<meta property="og:description" content="Welcome to Xavier&apos;s Blog">
+<meta property="og:description" content="尽管HttpServleResponse.sendRedirect和RequestDispatcher.forward方法都可以让浏览器获得另外一个URL所指向的资源，但两者的内部运行机制有着很大的区别。下面是sendRedirect方法实现的请求重定向与forward方法实现的请求转发的总结比较： （1）forward方法只能将请求转发给同一个Web应用中的组件,而sendRedirect方法不">
+<meta property="og:updated_time" content="2017-08-29T10:05:01.706Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xavier&#39;s">
-<meta name="twitter:description" content="Welcome to Xavier&apos;s Blog">
+<meta name="twitter:title" content="JavaWeb中实现跳转forward和sendRedirect的不同">
+<meta name="twitter:description" content="尽管HttpServleResponse.sendRedirect和RequestDispatcher.forward方法都可以让浏览器获得另外一个URL所指向的资源，但两者的内部运行机制有着很大的区别。下面是sendRedirect方法实现的请求重定向与forward方法实现的请求转发的总结比较： （1）forward方法只能将请求转发给同一个Web应用中的组件,而sendRedirect方法不">
 
 
 
@@ -129,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/29/ForwardAndSendRedirect/"/>
 
 
 
 
 
-  <title>归档 | Xavier's</title>
+  <title>JavaWeb中实现跳转forward和sendRedirect的不同 | Xavier's</title>
   
 
 
@@ -160,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,403 +266,178 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 13 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/ForwardAndSendRedirect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Neal Xavier">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xavier's">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaWeb中实现跳转forward和sendRedirect的不同</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T12:49:43+08:00">
+                2017-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb基础/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaWeb基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <p>尽管HttpServleResponse.sendRedirect和RequestDispatcher.forward方法都可以让浏览器获得另外一个URL所指向的资源，但两者的内部运行机制有着很大的区别。下面是sendRedirect方法实现的请求重定向与forward方法实现的请求转发的总结比较：</p>
+<p>（1）forward方法只能将请求转发给同一个Web应用中的组件,而sendRedirect方法不仅可以重定向到当前应用程序中的其他资源，还可以重定向到同一个站点上的其他应用程序中的资源，甚至是使用绝对URL重定向到其他站点的资源。<br><strong>如果传递sendRedirect方法的相对URL以”/“开头，它是相对于整个web站点的根目录；如果创建RequestDispatcher对象时指定的相对URL以”/“开头，它是相对于当前web应用程序的根目录</strong>。</p>
+<p>（2）调用sendRedirect方法重定向的访问过程结束后，浏览器地址栏中显示的URL会发生改变，有初始的URL地址变成重定向的目标URL;而调用forward方法的请求转发过程结束后，浏览器地址栏保持初始的URL地址不变。</p>
+<p>（3）sendRedirect方法对浏览器的请求直接作出响应，响应的结果就是告诉浏览器去重新发出对另外一个URL的访问请求，这个过程好比有个绰号叫”浏览器”的人写信给张三借钱，张三回信说没有钱，让”浏览器”去找李四借，并将李四现在的通信地址给了”浏览器”，可见，”浏览器”一共发出了两封信和收到两次回复，”浏览器”也知道它借到的钱出自李四之手。</p>
+<p>（4）forward方法的调用者与被调用者之间共享相同的reuqest对象和response对象，它们属于同一个访问请求和相应过程；而sendRedirect方法调用者与被调用者使用各自的request对象和response对象，它们属于两个独立的访问请求和响应过程，如果一次请求的相应过程被设计成由web应用程序内部的多个资源来协同完成，这就需要在同一个web应用程序的内部资源之间进行跳转，并且在跳转之前往往要进行一些前期的预处理，然后再使用HttpServletRequest.setAttribute方法将预处理结果传递给下一个资源，这种情况下就必须使用RequestDispatcher.forward方法。不同web应用程序之间的重定向，特别是要重定向到另外一个web站点上的资源的情况，都应该使用HttpServletResponse.sendRedirect方法。</p>
+<p>（5）无论是forward方法，还是sendRedirect方法在调用它们之前，都不能有内容已经被实际输出到了客户端。如果缓冲区中已经有了一些内容，这些内容将被缓冲区中清除。</p>
+<p>总结：<br>（1）forward是在服务器端完成的，sendRedirect是在客户端的。<br>（2）forward的是一次请求，所以访问速度会比较快，并且地址栏不会有变化；而sendRedirect是两次不同的请求，所以访问速度会比较慢，地址栏会发生变化。<br>（3）forward方法必须是在同一台服务器下完成，sendRedirect可以在不同的服务器下完成。</p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/forward/" rel="tag"># forward</a>
+          
+            <a href="/tags/sendRedirect/" rel="tag"># sendRedirect</a>
+          
         </div>
       
+
+      
+      
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/23/ObjectMethodOfhashCode/" rel="next" title="【转载】浅析Java中的hashCode方法">
+                <i class="fa fa-chevron-left"></i> 【转载】浅析Java中的hashCode方法
+              </a>
+            
+          </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          <span class="post-nav-divider"></span>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/29/ForwardAndSendRedirect/" itemprop="url">
-              
-                <span itemprop="name">JavaWeb中实现跳转forward和sendRedirect的不同</span>
-              
-            </a>
-        
-      </h2>
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-29T12:49:43+08:00"
-              content="2017-08-29" >
-          08-29
-        </time>
-      </div>
-
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/23/ObjectMethodOfhashCode/" itemprop="url">
-              
-                <span itemprop="name">【转载】浅析Java中的hashCode方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-23T12:18:47+08:00"
-              content="2017-08-23" >
-          08-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/19/ListIterator/" itemprop="url">
-              
-                <span itemprop="name">ListIterator接口</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-19T16:25:26+08:00"
-              content="2017-08-19" >
-          08-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/18/ObjectMethodOfEquals/" itemprop="url">
-              
-                <span itemprop="name">Object类的equals方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-18T17:05:03+08:00"
-              content="2017-08-18" >
-          08-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/18/BasicWebKnowledge/" itemprop="url">
-              
-                <span itemprop="name">Web应用的相关知识</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-18T13:56:47+08:00"
-              content="2017-08-18" >
-          08-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/18/WEBContainer/" itemprop="url">
-              
-                <span itemprop="name">浅析Web容器</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-18T10:40:10+08:00"
-              content="2017-08-18" >
-          08-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/17/CustomedTagJSP/" itemprop="url">
-              
-                <span itemprop="name">自定义标签开发</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-17T17:16:11+08:00"
-              content="2017-08-17" >
-          08-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/07/BinaryTreePostOrderTraversal/" itemprop="url">
-              
-                <span itemprop="name">Lintcode学习笔记之二叉树后序遍历</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-07T21:16:47+08:00"
-              content="2017-08-07" >
-          08-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/04/BinaryTreeInorderTraversal/" itemprop="url">
-              
-                <span itemprop="name">Lintcode学习笔记之二叉树中序遍历</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-04T17:44:03+08:00"
-              content="2017-08-04" >
-          08-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/03/BinaryTreePreorderTraversal/" itemprop="url">
-              
-                <span itemprop="name">Lintcode学习笔记之二叉树先序遍历</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-03T20:50:34+08:00"
-              content="2017-08-03" >
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
+    </div>
+  </div>
 
 
           </div>
@@ -668,6 +445,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -863,11 +644,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
